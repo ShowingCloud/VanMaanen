@@ -1,0 +1,23 @@
+{
+  "name": "vanmaanen",
+  "version": "1.0.0",
+  "description": "Intelligent Natural Language Communication System for Various Daily Tasks",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShowingCloud/VanMaanen.git"
+  },
+  "author": "Showing Cloud Inc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShowingCloud/VanMaanen/issues"
+  },
+  "homepage": "https://github.com/ShowingCloud/VanMaanen#readme"
+}
