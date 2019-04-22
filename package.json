@@ -4,9 +4,16 @@
   "description": "Intelligent Natural Language Communication System for Various Daily Tasks",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "connect-redis": "^3.4.1",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.5.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-register": "^6.26.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

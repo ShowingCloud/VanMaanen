@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# Mask configure files with secret credentials
+config.js
