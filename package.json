@@ -4,16 +4,20 @@
   "description": "Intelligent Natural Language Communication System for Various Daily Tasks",
   "main": "index.js",
   "dependencies": {
+    "babel-register": "^6.26.0",
+    "blueimp-md5": "^2.10.0",
     "body-parser": "^1.18.3",
     "connect-redis": "^3.4.1",
     "cookie-parser": "^1.4.4",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
-    "mongoose": "^5.5.2"
+    "form-data": "^2.3.3",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.2",
+    "node-fetch": "^2.3.0"
   },
-  "devDependencies": {
-    "babel-register": "^6.26.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,5 +30,22 @@
   "bugs": {
     "url": "https://github.com/ShowingCloud/VanMaanen/issues"
   },
-  "homepage": "https://github.com/ShowingCloud/VanMaanen#readme"
+  "homepage": "https://github.com/ShowingCloud/VanMaanen#readme",
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "mongo": true,
+      "node": true
+    },
+    "extends": "airbnb",
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "sourceType": "module"
+    },
+    "rules": {}
+  }
 }
