@@ -3,7 +3,6 @@ const Restaurants = require('../controller/meituan-v1/restaurants');
 const Orders = require('../controller/meituan-v1/orders');
 const Products = require('../controller/meituan-v1/products');
 const Auth = require('../controller/users/auth');
-const Tests = require('../controller/meituan-v1/test');
 
 const router = express.Router();
 

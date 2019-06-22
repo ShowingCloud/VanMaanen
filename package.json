@@ -10,8 +10,13 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
+    "helmet": "^3.18.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.6.0"
+    "mongoose": "^5.6.0",
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.0",
+    "passport-openidconnect": "0.0.2"
   },
   "devDependencies": {},
   "scripts": {
