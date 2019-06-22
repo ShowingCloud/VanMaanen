@@ -1,48 +1,62 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const connectRedis = require('connect-redis');
-const bodyParser = require('body-parser');
+const Express = require('express');
+const Passport = require('passport');
+const Session = require('express-session');
+const RedisStore = require('connect-redis')(Session);
+const OIDCStrategy = require('passport-openidconnect').Strategy;
 
-const db = require('./prototype/mongodb');
-// const history = require('connect-history-api-fallback');
-const config = require('./config');
-const router = require('./routes/index');
+require('./models/mongodb');
+const config = require('./config/config');
+const router = require('./routes');
 
-const app = express();
 
-app.all('*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('X-Powered-By', '3.2.1');
-  if (req.method === 'OPTIONS') {
-    res.send(200);
-  } else {
-    next();
-  }
+Passport.use(new OIDCStrategy({
+  clientID: config.oidcClientId,
+  clientSecret: config.oidcClientSecret,
+  authorizationURL: 'https://sso.scs.im/oidc/auth',
+  tokenURL: 'https://sso.scs.im/oidc/token',
+  callbackURL: 'http://lumi.scs.im/auth/sso/callback',
+},
+(token, tokenSecret, profile, done) => done(null, profile)));
+
+Passport.serializeUser((profile, done) => {
+  done(null, profile);
 });
 
-const RedisStore = connectRedis(session);
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({}));
-app.use(cookieParser());
-app.use(session({
-  name: 'vanmaanen-session',
-  secret: 'VanMaanen',
-  resave: true,
+Passport.deserializeUser((profile, done) => {
+  done(null, profile);
+});
+
+
+const app = Express();
+
+app.set('views', `${__dirname}/views`);
+app.set('view engine', 'ejs');
+
+app.use(require('helmet')());
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')(config.sessionSecret));
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').json());
+
+app.enable('trust proxy');
+app.use(Session({
+  cookie: {
+    secure: true,
+  },
+  resave: false,
   saveUninitialized: false,
+  secret: [config.sessionSecret, ...config.otherSessionSecrets],
   store: new RedisStore({
-    url: config.sessionStorageURL,
+    url: config.redisStorageURL,
+    logErrors: true,
+    prefix: config.redisSessionPrefix,
   }),
 }));
+
+app.use(Passport.initialize());
+app.use(Passport.session());
+
 router(app);
 
-// app.use(history());
-console.log('*********************************');
-console.log(`service start on ${config.port}`);
-console.log('*********************************');
-app.listen(config.port);
 
-module.exports = app;
+app.listen(config.port);
