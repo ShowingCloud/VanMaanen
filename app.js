@@ -1,12 +1,13 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import connectRedis from 'connect-redis';
-import bodyParser from 'body-parser';
-import router from './routes/index';
-import db from './mongodb/db';
-// import history from 'connect-history-api-fallback';
-import config from './config';
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const connectRedis = require('connect-redis');
+const bodyParser = require('body-parser');
+
+const db = require('./prototype/mongodb');
+// const history = require('connect-history-api-fallback');
+const config = require('./config');
+const router = require('./routes/index');
 
 const app = express();
 
@@ -32,16 +33,12 @@ app.use(session({
   secret: 'VanMaanen',
   resave: true,
   saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: false,
-    maxAge: 365 * 24 * 60 * 60 * 1000,
-  },
   store: new RedisStore({
     url: config.sessionStorageURL,
   }),
 }));
 router(app);
+
 // app.use(history());
 console.log('*********************************');
 console.log(`service start on ${config.port}`);

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -37,11 +37,7 @@ const meituanProductsSchema = new mongoose.Schema({
     statusId: Number,
     stock: Number,
   }],
-  createTime: {
-    type: Date,
-    default: new Date(),
-  },
 });
 
 const MeituanProducts = mongoose.model('Foods', meituanProductsSchema);
-export default MeituanProducts;
+module.exports = MeituanProducts;

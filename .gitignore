@@ -61,4 +61,5 @@ typings/
 .next
 
 # Mask configure files with secret credentials
-config.js
+config
+config/*`

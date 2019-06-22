@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -97,11 +97,7 @@ const meituanOrdersSchema = new Schema({
     reduceFee: String,
     iconUrl: String,
   }],
-  createTime: {
-    type: Date,
-    default: new Date(),
-  },
 });
 
 const MeituanOrders = mongoose.model('Order', meituanOrdersSchema);
-export default MeituanOrders;
+module.exports = MeituanOrders;
