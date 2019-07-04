@@ -10,21 +10,19 @@ const router = require('./routes');
 
 
 Passport.use(new OIDCStrategy({
+  issuer: config.oidcIssuer,
   clientID: config.oidcClientId,
   clientSecret: config.oidcClientSecret,
   authorizationURL: 'https://sso.scs.im/oidc/auth',
-  tokenURL: 'https://sso.scs.im/oidc/token',
-  callbackURL: 'http://lumi.scs.im/auth/sso/callback',
+  tokenURL: 'https://sso-direct.scs.im/oidc/token',
+  userInfoURL: 'https://sso-direct.scs.im/oidc/me',
+  callbackURL: 'https://lumi.scs.im/auth/sso/callback',
+  scope: config.oidcScope,
 },
-(token, tokenSecret, profile, done) => done(null, profile)));
+(issuer, sub, profile, jwtClaims, accessToken, refreshToken, tokenResponse, done) => done(null, profile)));
 
-Passport.serializeUser((profile, done) => {
-  done(null, profile);
-});
-
-Passport.deserializeUser((profile, done) => {
-  done(null, profile);
-});
+Passport.serializeUser((profile, done) => done(null, profile));
+Passport.deserializeUser((profile, done) => done(null, profile));
 
 
 const app = Express();
