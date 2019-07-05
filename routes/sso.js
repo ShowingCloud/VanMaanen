@@ -8,6 +8,9 @@ router.get('/sso/callback', passport.authenticate('openidconnect', {
   successRedirect: '/auth/profile',
   failureRedirect: '/auth/login',
 }));
+
+router.get('/login',
+  (req, res) => res.render('login'));
 router.get('/profile',
   (req, res) => res.render('profile', { user: req.user }));
 
