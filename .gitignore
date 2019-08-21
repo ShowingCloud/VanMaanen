@@ -63,3 +63,5 @@ typings/
 # Mask configure files with secret credentials
 config
 config/*`
+
+newrelic.js
