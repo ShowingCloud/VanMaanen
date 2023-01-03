@@ -13,7 +13,7 @@
     "express-session": "^1.16.2",
     "helmet": "^3.23.3",
     "moment": "^2.29.4",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.13.15",
     "morgan": "^1.9.1",
     "newrelic": "^5.11.0",
     "node-fetch": "^2.6.7",
