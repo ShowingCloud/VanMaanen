@@ -15,7 +15,7 @@
     "moment": "^2.29.4",
     "mongoose": "^5.13.20",
     "morgan": "^1.9.1",
-    "newrelic": "^11.23.2",
+    "newrelic": "^11.5.0",
     "node-fetch": "^2.6.7",
     "passport": "^0.6.0",
     "passport-openidconnect": "0.1.1"
